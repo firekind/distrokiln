@@ -19,6 +19,8 @@ modules:
         - firefox
         - firefox-langpacks
         - malcontent-control
+        - yelp
+        - gnome-tour
     install:
       packages:
         - terra-release
