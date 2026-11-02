@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://schema.blue-build.org/module-list-v1.json
+
+modules:
+  - type: files
+    files:
+      - source: nix
+        destination: /
+
+  - type: dnf
+    install:
+      packages:
+        - nix
+        - nix-daemon
+
+  - type: script
+    scripts:
+      - stage-nix-store.sh
+
+  - type: systemd
+    system:
+      enabled:
+        - nix-daemon.service
+        - nix-daemon.socket
+        - nix.mount

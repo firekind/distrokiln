@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://schema.blue-build.org/module-list-v1.json
+
+modules:
+  - type: akmods
+    nvidia-driver: nvidia-open
+    install: []
+
+  # selinux policy for nvidia
+  - type: script
+    snippets:
+      - curl -fLsS --retry 5 https://raw.githubusercontent.com/NVIDIA/dgx-selinux/b988ea65e7b43009a705eb5e5d7e94048f916734/bin/RHEL9/nvidia-container.pp -o /tmp/nvidia-container.pp
+      - semodule -i /tmp/nvidia-container.pp
+      - rm -f /tmp/nvidia-container.pp
