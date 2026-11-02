@@ -28,13 +28,11 @@ modules:
         - 1password
         - tailscale
 
-  - type: default-flatpaks
-    configurations:
-      - notify: true
-        scope: system
-        install:
-          - app.zen_browser.zen
-
   - from-file: common/nix.yml
+
+  - type: os-release
+    properties:
+      PRETTY_NAME: nyohhira (Fedora Silverblue)
+      DEFAULT_HOSTNAME: nyohhira
 
   - type: signing
