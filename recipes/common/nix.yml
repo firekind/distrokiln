@@ -18,7 +18,8 @@ modules:
 
   - type: systemd
     system:
-      enabled:
-        - nix-daemon.service
+      disabled:
         - nix-daemon.socket
+      enabled:
+        - nix-daemon
         - nix-overlay.service
