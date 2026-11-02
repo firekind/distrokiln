@@ -1,0 +1,15 @@
+[Unit]
+Description=Mount Nix store overlay on /nix
+DefaultDependencies=no
+After=local-fs.target
+Before=systemd-tmpfiles-setup.service nix-daemon.service nix-daemon.socket
+RequiresMountsFor=/var
+ConditionPathExists=/usr/libexec/mount-nix.sh
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/libexec/mount-nix.sh
+
+[Install]
+WantedBy=sysinit.target

@@ -21,4 +21,4 @@ modules:
       enabled:
         - nix-daemon.service
         - nix-daemon.socket
-        - nix.mount
+        - nix-overlay.service

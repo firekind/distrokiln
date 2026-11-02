@@ -3,13 +3,11 @@ set -euo pipefail
 
 # Nix needs /nix to be writable, but on an ostree/bootc system everything
 # outside /etc and /var is read-only at runtime. So /nix is left as an empty
-# mountpoint and an overlay is mounted there at boot (see nix.mount):
-# /usr/share/nix-store as the read-only lower layer, /var/lib/nix-store as the
-# writable upper layer.
+# mountpoint and an overlay is mounted there at boot (see nix-overlay.service).
 #
-# The nix RPM installs its store skeleton into /nix during the build. This moves
-# that skeleton to /usr/share/nix-store so it becomes the overlay's lower layer,
-# and leaves /nix empty for the mount to land on.
+# Anything the nix RPMs place in /nix during the build is moved to
+# /usr/share/nix-store, which ships in the image and becomes the overlay's
+# read-only lower layer. /nix is left empty for the mount to land on.
 
 mkdir -p /usr/share/nix-store
 
