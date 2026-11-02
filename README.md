@@ -1,43 +1,59 @@
-# BlueBuild Template &nbsp; [![bluebuild build badge](https://github.com/blue-build/template/actions/workflows/build.yml/badge.svg)](https://github.com/blue-build/template/actions/workflows/build.yml)
+# distrokiln &nbsp; [![bluebuild build badge](https://github.com/firekind/distrokiln/actions/workflows/build.yml/badge.svg)](https://github.com/firekind/distrokiln/actions/workflows/build.yml)
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+Personal [BlueBuild](https://blue-build.org/) images, one recipe per host.
 
-After setup, it is recommended you update this README to describe your custom image.
+| Host       | Image                                  | Base                 |
+| :--------- | :------------------------------------- | :------------------- |
+| `nyohhira` | `ghcr.io/firekind/distrokiln/nyohhira` | Fedora Silverblue 44 |
 
 ## Installation
 
-> [!WARNING]  
-> [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
+To rebase an existing atomic Fedora installation onto one of these images:
 
-To rebase an existing atomic Fedora installation to the latest build:
-
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
+- First switch to the unsigned image, to get the signing keys and policies installed:
   ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/blue-build/template:latest
+  bootc switch ghcr.io/firekind/distrokiln/nyohhira:44
   ```
-- Reboot to complete the rebase:
+- Reboot to complete the switch:
   ```
   systemctl reboot
   ```
-- Then rebase to the signed image, like so:
+- Then switch to the signed image:
   ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/blue-build/template:latest
+  bootc switch --enforce-container-sigpolicy ghcr.io/firekind/distrokiln/nyohhira:44
   ```
-- Reboot again to complete the installation
+- Reboot again to complete the installation:
   ```
   systemctl reboot
   ```
 
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
+Clear any layered packages with `rpm-ostree reset` before switching, or they'll
+conflict with what's already in the image.
+
+### Tags
+
+| Tag                       | Tracks                                                        |
+| :------------------------ | :------------------------------------------------------------ |
+| `44`                      | Latest build on Fedora 44 — no accidental major-version jumps |
+| `latest`                  | Latest build, whatever Fedora version the recipe specifies    |
+| `20261102`, `20261102-44` | Dated snapshots                                               |
+| `<short-sha>-44`          | A specific commit's build                                     |
+
+Fedora releases are bumped deliberately: change `image-version` in the recipe,
+push, then switch to the new tag.
 
 ## ISO
 
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/how-to/generate-iso/#_top). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
+An offline ISO can be generated on Fedora Atomic following
+[these instructions](https://blue-build.org/how-to/generate-iso/#_top). For a
+fresh machine it's usually simpler to install stock Silverblue and then switch.
 
 ## Verification
 
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
+These images are signed with [Sigstore](https://www.sigstore.dev/)'s
+[cosign](https://github.com/sigstore/cosign). Verify with the `cosign.pub` in
+this repo:
 
 ```bash
-cosign verify --key cosign.pub ghcr.io/blue-build/template
+cosign verify --key cosign.pub ghcr.io/firekind/distrokiln/nyohhira
 ```
