@@ -12,6 +12,7 @@ modules:
       files:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
         - 1password.repo
+        - tailscale.repo
     remove:
       packages:
         - firefox
@@ -25,6 +26,7 @@ modules:
         - asusctl
         - rog-control-center
         - 1password
+        - tailscale
 
   - type: default-flatpaks
     configurations:
