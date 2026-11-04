@@ -10,7 +10,6 @@ modules:
   - type: dnf
     repos:
       files:
-        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
         - 1password.repo
         - tailscale.repo
     remove:
@@ -22,11 +21,20 @@ modules:
         - gnome-tour
     install:
       packages:
-        - terra-release
-        - asusctl
-        - rog-control-center
         - 1password
         - tailscale
+
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - https://github.com/terrapkg/subatomic-repos/raw/6672af7a7125aef3400606dc9da174cfe423a0a1/terra.repo
+    install:
+      exclude:
+        - terra-release
+      packages:
+        - asusctl
+        - rog-control-center
 
   - from-file: common/nix.yml
 
