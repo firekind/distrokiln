@@ -28,7 +28,7 @@ modules:
     repos:
       cleanup: true
       files:
-        - https://github.com/terrapkg/subatomic-repos/raw/6672af7a7125aef3400606dc9da174cfe423a0a1/terra.repo
+        - terra.repo
     install:
       exclude:
         - terra-release
