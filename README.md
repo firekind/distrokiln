@@ -4,7 +4,7 @@ Personal [BlueBuild](https://blue-build.org/) images, one recipe per host.
 
 | Host       | Image                                  | Base                 |
 | :--------- | :------------------------------------- | :------------------- |
-| `nyohhira` | `ghcr.io/firekind/distrokiln/nyohhira` | Fedora Silverblue 44 |
+| `nyohhira` | `ghcr.io/firekind/distrokiln/nyohhira` | Fedora Silverblue 45 |
 
 ## Installation
 
@@ -12,7 +12,7 @@ To rebase an existing atomic Fedora installation onto one of these images:
 
 - First switch to the unsigned image, to get the signing keys and policies installed:
   ```
-  bootc switch ghcr.io/firekind/distrokiln/nyohhira:44
+  bootc switch ghcr.io/firekind/distrokiln/nyohhira:45
   ```
 - Reboot to complete the switch:
   ```
@@ -20,7 +20,7 @@ To rebase an existing atomic Fedora installation onto one of these images:
   ```
 - Then switch to the signed image:
   ```
-  bootc switch --enforce-container-sigpolicy ghcr.io/firekind/distrokiln/nyohhira:44
+  bootc switch --enforce-container-sigpolicy ghcr.io/firekind/distrokiln/nyohhira:45
   ```
 - Reboot again to complete the installation:
   ```
@@ -34,10 +34,10 @@ conflict with what's already in the image.
 
 | Tag                       | Tracks                                                        |
 | :------------------------ | :------------------------------------------------------------ |
-| `44`                      | Latest build on Fedora 44 — no accidental major-version jumps |
+| `45`                      | Latest build on Fedora 45 — no accidental major-version jumps |
 | `latest`                  | Latest build, whatever Fedora version the recipe specifies    |
-| `20261102`, `20261102-44` | Dated snapshots                                               |
-| `<short-sha>-44`          | A specific commit's build                                     |
+| `20261105`, `20261105-45` | Dated snapshots                                               |
+| `<short-sha>-45`          | A specific commit's build                                     |
 
 Fedora releases are bumped deliberately: change `image-version` in the recipe,
 push, then switch to the new tag.
