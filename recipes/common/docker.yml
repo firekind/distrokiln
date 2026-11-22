@@ -15,7 +15,7 @@ modules:
 
   - type: systemd
     system:
-      enable:
+      enabled:
         - docker.socket
 
   - type: files
