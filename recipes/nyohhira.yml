@@ -21,6 +21,7 @@ modules:
         - gnome-tour
     install:
       packages:
+        - zsh
         - 1password
         - tailscale
 
