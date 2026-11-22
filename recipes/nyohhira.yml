@@ -38,9 +38,11 @@ modules:
 
   - from-file: common/nix.yml
 
+  - from-file: common/docker.yml
+
   - type: os-release
     properties:
-      PRETTY_NAME: nyohhira (Fedora Silverblue)
+      PRETTY_NAME: nyohhira (Fedora 45 Silverblue)
       DEFAULT_HOSTNAME: nyohhira
 
   - type: signing
